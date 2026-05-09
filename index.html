@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anthony Ruiz — AI Developer & Screenwriter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:          #0a0f1e;
+      --bg-surface:  #0f1528;
+      --bg-card:     #131929;
+      --border:      #1e2a42;
+      --text:        #e8edf5;
+      --text-muted:  #8898b8;
+      --accent:      #7eb8f7;
+      --accent-dim:  #3a6fa8;
+      --accent-glow: rgba(126, 184, 247, 0.12);
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── Layout ─────────────────────────────────────────── */
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 6rem 0;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ─── Nav ─────────────────────────────────────────────── */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(10, 15, 30, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+    }
+
+    .nav-name {
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* ─── Header ──────────────────────────────────────────── */
+
+    #header {
+      padding: 10rem 0 7rem;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .header-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .header-location {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.025em;
+      color: var(--text);
+    }
+
+    .tagline {
+      font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+      font-weight: 300;
+      color: var(--text-muted);
+      max-width: 540px;
+      line-height: 1.6;
+    }
+
+    .tagline em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 400;
+    }
+
+    .header-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding-top: 0.5rem;
+    }
+
+    /* ─── Buttons ─────────────────────────────────────────── */
+
+    .btn {
+      display: inline-block;
+      padding: 0.7rem 1.5rem;
+      border-radius: 6px;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+      border: 1px solid var(--accent);
+    }
+
+    .btn-primary:hover {
+      background: #a0ccfb;
+      border-color: #a0ccfb;
+      transform: translateY(-1px);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+
+    .btn-ghost:hover {
+      color: var(--text);
+      border-color: var(--accent-dim);
+      background: var(--accent-glow);
+    }
+
+    /* ─── Section Labels ──────────────────────────────────── */
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.25rem;
+    }
+
+    h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 2rem;
+    }
+
+    /* ─── About ───────────────────────────────────────────── */
+
+    #about .about-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      max-width: 680px;
+    }
+
+    #about p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+    }
+
+    #about p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* ─── Services ────────────────────────────────────────── */
+
+    #services {
+      background: var(--bg-surface);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .services-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .service-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.75rem;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .service-card:hover {
+      border-color: var(--accent-dim);
+      transform: translateY(-2px);
+    }
+
+    .service-number {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .service-card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+      letter-spacing: -0.01em;
+    }
+
+    .service-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ─── Work ────────────────────────────────────────────── */
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    @media (min-width: 640px) {
+      .work-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .work-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.75rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      opacity: 0.7;
+      transition: opacity 0.2s ease;
+    }
+
+    .work-card:hover {
+      opacity: 1;
+    }
+
+    .work-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      background: var(--border);
+      border-radius: 4px;
+      padding: 0.2rem 0.5rem;
+      width: fit-content;
+    }
+
+    .work-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .work-card p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .work-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent-dim);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s ease;
+      cursor: default;
+    }
+
+    .work-card:hover .work-link {
+      color: var(--accent);
+    }
+
+    /* ─── Contact ─────────────────────────────────────────── */
+
+    #contact {
+      background: var(--bg-surface);
+    }
+
+    #contact .contact-inner {
+      max-width: 560px;
+    }
+
+    #contact p {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      line-height: 1.75;
+    }
+
+    #contact .email-line {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 1.25rem;
+    }
+
+    #contact .email-line a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    #contact .email-line a:hover {
+      color: #a0ccfb;
+    }
+
+    /* ─── Footer ──────────────────────────────────────────── */
+
+    footer {
+      padding: 2.5rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    footer .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    footer .footer-links {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    footer .footer-links a {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    footer .footer-links a:hover {
+      color: var(--accent);
+    }
+
+    /* ─── Scroll fade-in ──────────────────────────────────── */
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Mobile — 375px ─────────────────────────────────── */
+
+    @media (max-width: 480px) {
+      /* Nav — shrink links to fit rather than hiding them */
+      .nav-links {
+        gap: 1.1rem;
+      }
+      .nav-links a {
+        font-size: 0.78rem;
+      }
+
+      /* Sections — reduce vertical padding */
+      section {
+        padding: 4rem 0;
+      }
+
+      /* Header — tighter top padding, allow natural height */
+      #header {
+        padding: 6rem 0 3.5rem;
+        min-height: auto;
+      }
+      .header-inner {
+        gap: 1.1rem;
+      }
+
+      /* Buttons — stack full-width */
+      .header-cta {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      .btn {
+        text-align: center;
+        width: 100%;
+      }
+
+      /* About — slightly tighter body text */
+      #about p {
+        font-size: 1rem;
+      }
+
+      /* Cards — less internal padding */
+      .service-card,
+      .work-card {
+        padding: 1.4rem;
+      }
+      .service-card h3 {
+        font-size: 0.975rem;
+      }
+
+      /* Contact */
+      #contact p {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      #contact .btn {
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+
+      /* Footer — stack vertically */
+      footer .container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+      }
+      footer .footer-links {
+        gap: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav>
+    <div class="container">
+      <a href="#header" class="nav-name">Anthony Ruiz</a>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <section id="header">
+    <div class="container">
+      <div class="header-inner">
+        <span class="header-location">Los Angeles, CA</span>
+        <h1>Anthony<br />Ruiz</h1>
+        <p class="tagline">
+          Building intelligent tools with AI.<br />
+          Writing stories that <em>stay with you</em>.
+        </p>
+        <div class="header-cta">
+          <a href="#work" class="btn btn-primary">See My Work</a>
+          <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container">
+      <div class="fade-in">
+        <p class="section-label">About</p>
+        <h2>Code in the morning.<br />Pages at night.</h2>
+        <div class="about-body">
+          <p>
+            I live in Los Angeles and spend my time doing two things most people keep separate:
+            <strong>building software</strong> and <strong>writing screenplays</strong>. The tools I
+            build are sharp and purposeful — custom websites, automation pipelines, AI applications
+            that actually solve something. The scripts I write are character-first, structure-obsessed,
+            and set in worlds that feel lived-in. Working in both disciplines has convinced me they
+            run on the same fuel: a clear problem, a point of view, and the discipline to cut
+            everything that doesn't serve the story.
+          </p>
+          <p>
+            I recently walked away from a full-time role to go independent — which means I'm now
+            doing this work on my own terms, in my own city, with my own clients. I build with
+            <strong>Claude Code</strong> and ship fast. I develop screenplays between projects and
+            without apology. If you're looking for a developer who thinks like a writer — or you just
+            need something built well, by someone who gives a damn — <strong>let's talk</strong>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Services -->
+  <section id="services">
+    <div class="container">
+      <div class="fade-in">
+        <p class="section-label">Services</p>
+        <h2>What I build.</h2>
+        <div class="services-grid">
+
+          <div class="service-card">
+            <p class="service-number">01</p>
+            <h3>A site that works as hard as you do.</h3>
+            <p>Built from scratch, not a template. I design and develop custom websites that load fast, look sharp, and actually move people to reach out.</p>
+          </div>
+
+          <div class="service-card">
+            <p class="service-number">02</p>
+            <h3>Hours back in your week.</h3>
+            <p>The tasks you're doing manually right now? Most of them can run themselves. I build automation workflows that remove the repetition so you can focus on the work that matters.</p>
+          </div>
+
+          <div class="service-card">
+            <p class="service-number">03</p>
+            <h3>AI that's actually useful to you.</h3>
+            <p>Not a generic chatbot dropped on your homepage — a focused tool trained on your context, built for your workflow, and designed to solve a real problem your team faces every day.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Work -->
+  <section id="work">
+    <div class="container">
+      <div class="fade-in">
+        <p class="section-label">Work</p>
+        <h2>Selected projects.</h2>
+        <div class="work-grid">
+
+          <div class="work-card">
+            <span class="work-badge">Coming Soon</span>
+            <h3>Project Title</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+            <span class="work-link">View Project &rarr;</span>
+          </div>
+
+          <div class="work-card">
+            <span class="work-badge">Coming Soon</span>
+            <h3>Project Title</h3>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <span class="work-link">View Project &rarr;</span>
+          </div>
+
+          <div class="work-card">
+            <span class="work-badge">Coming Soon</span>
+            <h3>Project Title</h3>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+            <span class="work-link">View Project &rarr;</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- Contact -->
+  <section id="contact">
+    <div class="container">
+      <div class="fade-in">
+        <div class="contact-inner">
+          <p class="section-label">Contact</p>
+          <h2>Let's build something.</h2>
+          <p>
+            Whether you have a project in mind, a problem you haven't quite framed yet, or you just want
+            to see if we'd be a good fit — my inbox is open. I respond to every message personally.
+          </p>
+          <a href="mailto:hello@anthonyruiz.co" class="btn btn-primary">Say Hello</a>
+          <p class="email-line">Or reach me directly at <a href="mailto:hello@anthonyruiz.co">hello@anthonyruiz.co</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Anthony Ruiz. Los Angeles, CA.</p>
+      <div class="footer-links">
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for nav links on mobile (supplement CSS scroll-behavior)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    });
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Nav active link highlight on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    const navObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            navLinks.forEach(link => {
+              link.style.color = link.getAttribute('href') === '#' + entry.target.id
+                ? 'var(--accent)'
+                : '';
+            });
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    sections.forEach(section => navObserver.observe(section));
+  </script>
+
+</body>
+</html>
